@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="styles/carticon.css">
 <style>
 
     .custom-dropdown-menu {
@@ -69,7 +69,10 @@
     font-size: 20px;
     position: relative;
     padding: 0 10px;
-}
+    }
+    .icon-link:hover {
+        color: #cccccc;
+    }
     .profile-link {
         margin-left: 10px; /* Space between icons and profile image */
         margin-right: 10px;
@@ -106,15 +109,21 @@
     display: flex;
     align-items: center;
     }
-
+    .navbar{
+        background-color: rgb(112, 72, 72);
+    }
     .icon-group {
         display: flex;
         align-items: center;
     }
 
+    .navbar-brand img {
+            max-height: 40px; /* Adjust height as needed */
+        }
     .navbar-nav .nav-link {
         font-size: 18px; /* Make the navbar items text smaller */
         padding-left: 20px; /* More padding to the left for each item */
+        color: #FFFFFF;
     }
 
     /* Custom styling for navbar-toggler */
@@ -135,7 +144,21 @@
     .navbar-collapse.navbar-dark-theme .nav-link:hover {
         color: #cccccc; /* Light gray color on hover */
     }
+    .navbar-brand{
+        font-family:bold;
+        color:#FFFFFF;
+        font-size: 25px;
+    }
 
+    .navbar-brand:hover{
+        color:rgba(0,0,0,.87);
+    }
+
+    .split-text{
+        width: 20px;
+        white-space: pre-wrap;
+        line-height:0.8;
+    }
     .dropdown-menu {
             max-height: 300px;
             overflow-y: auto;
@@ -149,69 +172,52 @@
             object-fit: cover;
             margin-right: 10px;
         }
+        .navbar-toggler{
+            color:#ffffff;
+        }
+        .navbar-toggler-icon{
+            color:#ffffff;
+        }
 </style>
 
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <nav class="navbar navbar-expand-md fixed-top">
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link grow" href="dashboard.php">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link grow" href="profile.php">My Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link grow" href="petRegister.php">Post a pet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link grow" href="pet_list.php">Adopt a pet</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link grow" href="pet_list_user.php">Your Pets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link grow" href="#" id="logout">Logout</a>
-                </li>
-            </ul>
-
+            <a class="navbar-brand split-text" href="#">IRA SKINCARE</a>
+            <div class="navbar-icons ml-auto">
+                <div class="icon-group">
+                    <div class="cart-container">
+                        <a href="cart.html" class="nav-link icon-link grow">
+                            <span class="cart-count" id="cart-count">0</span>
+                            <i class="fas fa-shopping-cart icon"></i>
+                        </a>
+                    </div>
+                    <a class="nav-link icon-link grow" href="#">
+                        <i class="fas fa-bell"></i>
+                    </a>
+                    <a class="nav-link icon-link grow" href="#">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="profile.php" class="shrink-image">
+                        <?php if (isset($_SESSION['profile_image'])) : ?>
+                            <img src="data:image/jpeg;base64,<?php echo $_SESSION['profile_image']; ?>" alt="Profile Image" class="rounded-circle" style="width: 60px; height: 60px;">
+                        <?php else : ?>
+                            <img src="images/placeholder.jpg" alt="Default Profile Image" class="rounded-circle" style="width: 80px; height: 80px;">
+                        <?php endif; ?>
+                    </a>
+                    <a class="nav-link icon-link grow" href="#" style="margin-left: 30px;">
+                        <i class="fas fa-sign-out-alt icon"></i>
+                    </a>
+                </div>
+                
+            </div>
         </div>
 
-            <div class="navbar-icons ml-auto" style="margin-right: 80px;">
-                <div class="icon-group">
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle icon-link grow" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-dark custom-dropdown-menu wide-dropdown" aria-labelledby="notificationsDropdown">
-                            <div id="notifications">
-                                <!-- Notifications will be dynamically loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle icon-link grow" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-dark custom-dropdown-menu wide-dropdown" aria-labelledby="messageDropdown">
-                            <div id="chat-users">
-                                <!-- Messages will be generated here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="profile.php" class="shrink-image">
-                    <?php if (isset($_SESSION['profile_image'])) : ?>
-                        <img src="data:image/jpeg;base64,<?php echo $_SESSION['profile_image']; ?>" alt="Profile Image" class="rounded-circle" style="width: 60px; height: 60px;">
-                    <?php else : ?>
-                        <img src="images/placeholder.jpg" alt="Default Profile Image" class="rounded-circle" style="width: 80px; height: 80px;">
-                    <?php endif; ?>
-                </a>
-            </div>
+            
         <script>
             document.getElementById('logout').addEventListener('click', function() {
                 window.location.href = 'logout.php';

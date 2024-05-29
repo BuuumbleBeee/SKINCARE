@@ -1,5 +1,4 @@
 <style>
-
     .login_move {
         padding-right: 5%;
     }
@@ -16,24 +15,24 @@
     position: relative;
     padding: 0 10px;
 }
-.profile-link {
-    margin-left: 10px; /* Space between icons and profile image */
-    margin-right: 10px;
-}
-.icon-link i {
-    font-size: 20px;
-}
+    .profile-link {
+        margin-left: 10px; /* Space between icons and profile image */
+        margin-right: 10px;
+    }
+    .icon-link i {
+        font-size: 20px;
+    }
 
-.icon-link .badge {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 5px;
-    font-size: 10px;
-}
+    .icon-link .badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: red;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 10px;
+    }
     .navbar{
         background-color: rgb(112, 72, 72);
     }
@@ -97,8 +96,6 @@
     
     <nav class="navbar navbar-expand-md fixed-top">
 
-        
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -125,7 +122,7 @@
 
                 <div class="navbar-icons animate-slide-down">
                     <a href="login.php" class="nav-link">
-                        <i class="fas fa-sign-in-alt"></i>
+                        <i class="fas fa-sign-in-alt icon"></i>
                     </a>
                 </div>
             </ul>

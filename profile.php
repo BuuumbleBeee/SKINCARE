@@ -9,41 +9,7 @@
     <link rel="stylesheet" href="styles/animations.css">
     <?php
 
-    session_start();
-
-    // Redirect to login page if the user is not logged in
-    if (!isset($_SESSION['user_id'])) {
-        header('Location: login.php');
-        exit();
-    }
-
     require('handlers/dbHandler.php');
-
-    try {
-        // Get the PDO instance
-        $pdo = getPDOConnection();
-
-        // Prepare the SQL query to get the logged-in user's information
-        $sql = "SELECT * FROM users WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id', $_SESSION['user_id']);
-        $stmt->execute();
-
-        $user = $stmt->fetch();
-
-        if (!$user) {
-            // If the user does not exist, log them out
-            session_unset();
-            session_destroy();
-            header('Location: login.php');
-            exit();
-        }
-    } catch (PDOException $e) {
-        // Store the error message in the session and redirect to the login page
-        $_SESSION['error_message'] = "Database error: " . $e->getMessage();
-        header('Location: login.php');
-        exit();
-    }
     require('includes/dependencies.php');
     ?>
 </head>

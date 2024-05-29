@@ -85,17 +85,90 @@
             height: auto;
         }
     </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
+    <?php
+        include('utils/navigationbarcustomer.php');
+    ?>
 
     <div class="content-for-footer">
     <div class="container mt-5" style="padding-top: 70px;">
         
         <h2 class="mb-5 fade-in">Products</h2>
-        <div id="products" class="container-box slide-in"></div>
-        <h2 class="mb-5 fade-in">Brands</h2>
-        <div id="brands" class="container-box slide-in"></div>
+        <div id="products" class="container-box slide-in">
+        <div id="product-detail-container"></div>
+
+            <script>
+  document.addEventListener('DOMContentLoaded', function() {
+            fetch('fetch_products.php')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('product-detail-container');
+                    
+                    if (data.length === 0) {
+                        const noProductsMessage = document.createElement('p');
+                        noProductsMessage.textContent = "No products to show";
+                        noProductsMessage.className = 'no-products-message';
+                        container.appendChild(noProductsMessage);
+                        return;
+                    }
+
+                    data.forEach(product => {
+                        const productDiv = document.createElement('div');
+                        productDiv.className = 'product-card';
+
+                        const img = document.createElement('img');
+                        img.src = `data:image/jpeg;base64,${product.Product_Image}`;
+                        img.alt = product.Products_Name;
+                        productDiv.appendChild(img);
+
+                        const infoDiv = document.createElement('div');
+                        infoDiv.className = 'product-info';
+
+                        const name = document.createElement('h3');
+                        name.textContent = product.Products_Name;
+                        infoDiv.appendChild(name);
+
+                        const description = document.createElement('p');
+                        description.textContent = product.Products_Description;
+                        infoDiv.appendChild(description);
+
+                        const price = document.createElement('p');
+                        price.textContent = `$${product.Products_Price}`;
+                        infoDiv.appendChild(price);
+
+                        const stock = document.createElement('p');
+                        stock.textContent = `Stock: ${product.Stock_Avaibility}`;
+                        infoDiv.appendChild(stock);
+
+                        const addToCartButton = document.createElement('button');
+                        addToCartButton.textContent = 'Add to Cart';
+                        addToCartButton.className = 'add-to-cart';
+                        addToCartButton.onclick = function(event) {
+                            event.stopPropagation();
+                            addToCart(product.Products_ID);
+                        };
+                        infoDiv.appendChild(addToCartButton);
+
+                        productDiv.appendChild(infoDiv);
+
+                        productDiv.onclick = function() {
+                            window.location.href = `product_detail.html?id=${product.Products_ID}`;
+                        };
+
+                        container.appendChild(productDiv);
+                    });
+                })
+                .catch(error => console.error('Error fetching products:', error));
+        });
+
+        function addToCart(productId) {
+            console.log(`Product ${productId} added to cart`); // Implement your add to cart logic here
+        }
+            </script>
+        </div>
+
     </div>
     </div>  
     <?php
