@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="styles/content.css">
   <?php
-  require('includes/dependencies.php');
+  ////script here
+    require('includes/dependencies.php');
   ?>
 </head>
 
